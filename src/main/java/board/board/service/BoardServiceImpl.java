@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import board.board.dto.BoardDto;
 import board.board.mapper.BoardMapper;
 
 @Service
+//@Transactional // 이것만 해도 먹힌다.
 public class BoardServiceImpl implements BoardService{
 	
 	@Autowired
@@ -28,7 +30,6 @@ public class BoardServiceImpl implements BoardService{
 	public BoardDto selectBoardDetail(int boardIdx) throws Exception{
 		BoardDto board = boardMapper.selectBoardDetail(boardIdx);
 		boardMapper.updateHitCount(boardIdx);
-		
 		return board;
 	}
 	

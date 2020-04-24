@@ -11,12 +11,16 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @PropertySource("classpath:/application.properties")
+//@EnableTransactionManagement
 public class DatabaseConfiguration {
 	
 	@Autowired
@@ -54,4 +58,9 @@ public class DatabaseConfiguration {
 	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory){
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
+	// 트랜잭션을 위해 하는 것이라는데... BoardServiceImple에 @Transactional만 해도 먹힌다..
+//	@Bean
+//	public PlatformTransactionManager transactionManager() throws Exception {
+//		return new DataSourceTransactionManager(dataSource());
+//	}
 }
